@@ -1,0 +1,479 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&family=Yomogi&display=swap');
+
+:root {
+    --bg-color: #fdfcf8;
+    /* Warm cream paper */
+    --text-primary: #4a4a4a;
+    /* Pencil gray */
+    --text-secondary: #707070;
+    --accent-color: #ff9f43;
+    /* Warm Marker Orange */
+    --accent-blue: #54a0ff;
+    /* Watercolor Blue */
+    --tape-color: rgba(255, 255, 255, 0.5);
+    --slide-width: 1280px;
+    --slide-height: 720px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    background: var(--bg-color);
+    background-image:
+        radial-gradient(#e6e6e6 1px, transparent 1px),
+        radial-gradient(#e6e6e6 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    /* Dot grid paper */
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.presentation-container {
+    position: relative;
+    width: var(--slide-width);
+    height: var(--slide-height);
+}
+
+/* Slide Base */
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Hand-made Paper Card */
+    background: #ffffff;
+    border-radius: 2px;
+    /* Slightly rough */
+    box-shadow:
+        1px 1px 0 rgba(0, 0, 0, 0.1),
+        0 10px 20px rgba(0, 0, 0, 0.05);
+    padding: 60px 80px;
+    display: none;
+    flex-direction: row;
+    /* Split layout capable */
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0;
+    transform: rotate(-1deg);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    overflow: hidden;
+    /* Sketchy border effect - simulated with organic border radius */
+    border: 3px solid #4a4a4a;
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    /* Organic shape */
+}
+
+/* Full Width Slide Variant */
+.slide.slide-full {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 100px;
+}
+
+.slide.slide-full .slide-content-wrapper {
+    padding-right: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.slide.slide-full h2 {
+    font-size: 3.8rem;
+    margin-bottom: 2.5rem;
+}
+
+.slide.slide-full h3 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.slide.slide-full ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.slide.slide-full li {
+    font-size: 2rem;
+    width: 100%;
+    max-width: 900px;
+    text-align: left;
+    margin-bottom: 2rem;
+    line-height: 1.4;
+}
+
+.slide.slide-full p.highlight-text {
+    font-family: 'Yomogi', cursive;
+    font-size: 2.8rem;
+    color: var(--text-primary);
+    margin: 2rem 0;
+    line-height: 1.6;
+}
+
+/* Text Split Slide Variant */
+.slide.slide-text-split {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* Center vertically */
+    padding: 50px 60px;
+}
+
+.slide.slide-text-split .left-pane {
+    flex: 0.45;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-right: 3px dashed #ccc;
+    padding-right: 40px;
+    height: 80%;
+}
+
+.slide.slide-text-split .right-pane {
+    flex: 0.55;
+    padding-left: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.slide.slide-text-split h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+    background: none;
+    padding: 0;
+}
+
+.slide.slide-text-split h3 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    color: var(--text-secondary);
+}
+
+.slide.slide-text-split i.large-icon {
+    font-size: 8rem;
+    margin-bottom: 2rem;
+    display: block;
+}
+
+.slide.slide-text-split ul {
+    width: 100%;
+}
+
+.slide.slide-text-split li {
+    font-size: 1.5rem;
+    /* Slightly smaller for density */
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
+}
+
+.slide.active {
+    display: flex;
+    opacity: 1;
+    transform: rotate(0deg);
+    z-index: 10;
+}
+
+.slide-content-wrapper {
+    flex: 1;
+    z-index: 2;
+    padding-right: 40px;
+}
+
+.slide-image-wrapper {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    gap: 20px;
+}
+
+/* Typography */
+h1 {
+    font-family: 'Yomogi', cursive;
+    font-size: 3.8rem;
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    transform: rotate(-2deg);
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--accent-blue);
+    display: inline-block;
+    background: rgba(84, 160, 255, 0.1);
+    padding: 0.5em 1em;
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    margin-bottom: 1rem;
+    transform: rotate(1deg);
+}
+
+.link-btn-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    align-items: center;
+}
+
+.analysis-link-btn {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    background: #6c5ce7;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1.6rem;
+    text-decoration: none;
+    font-family: 'Yomogi', cursive;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 2px solid white;
+    width: 90%;
+    max-width: 400px;
+}
+
+.btn-teal {
+    background: #00cec9;
+}
+
+.btn-teal:hover {
+    background: #00b5b0;
+}
+
+.btn-orange {
+    background: #e17055;
+}
+
+.btn-orange:hover {
+    background: #d35400;
+}
+
+h2 {
+    font-family: 'Yomogi', cursive;
+    font-size: 3.2rem;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+    background: linear-gradient(transparent 70%, rgba(255, 159, 67, 0.3) 70%);
+    /* Marker highlighter */
+    display: inline-block;
+    padding: 0 10px;
+}
+
+h3 {
+    font-size: 2rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+ul {
+    list-style: none;
+    width: 100%;
+}
+
+li {
+    font-size: 1.6rem;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+    position: relative;
+}
+
+li::before {
+    content: '●';
+    font-family: 'Yomogi', cursive;
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent-blue);
+    font-size: 1.2em;
+}
+
+.highlight {
+    font-family: 'Yomogi', cursive;
+    font-size: 1.3em;
+    /* Larger for emphasis */
+    color: #e55039;
+    /* Red pen */
+    font-weight: 700;
+    background: none;
+    text-decoration: underline wavy #e55039;
+    padding: 0 5px;
+}
+
+/* Post-it / Paper Note */
+.content-box {
+    background: #fff9c4;
+    /* Post-it yellow */
+    color: #4a4a4a;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Yomogi', cursive;
+    font-size: 1.4rem;
+    position: relative;
+    transform: rotate(1deg);
+    margin-top: 2rem;
+    border: none;
+    border-radius: 0;
+}
+
+/* Tape effect */
+.content-box::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 100px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* Placeholder Image Styles */
+.placeholder-image {
+    width: 100%;
+    height: 400px;
+    background: #f0f0f0;
+    border: 4px dashed #ccc;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #999;
+    font-family: 'Yomogi', cursive;
+    font-size: 2rem;
+    position: relative;
+    transform: rotate(2deg);
+    background-size: cover;
+    background-position: center;
+}
+
+/* Controls */
+.controls {
+    position: fixed;
+    bottom: 30px;
+    right: 40px;
+    display: flex;
+    gap: 15px;
+    z-index: 100;
+}
+
+.control-btn {
+    border: 3px solid var(--text-primary);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+.control-btn:hover {
+    background: var(--accent-blue);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.slide-counter {
+    position: fixed;
+    bottom: 30px;
+    left: 40px;
+    font-family: 'Yomogi', cursive;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+
+
+.analysis-link-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background: #5f27cd;
+}
+
+/* Animations */
+@keyframes popIn {
+    0% {
+        transform: scale(0.8) rotate(-5deg);
+        opacity: 0;
+    }
+
+    80% {
+        transform: scale(1.05) rotate(2deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+h1,
+.content-box {
+    animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+li {
+    opacity: 0;
+    animation: slideInRight 0.5s ease forwards;
+}
+
+li:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+li:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+li:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
