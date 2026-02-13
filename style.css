@@ -347,6 +347,22 @@ li::before {
     border-radius: 0;
 }
 
+.slide-illustration {
+    width: 100%;
+    max-height: 450px;
+    /* specific height to fit */
+    object-fit: contain;
+    border-radius: 15px;
+    /* Organic roundness */
+    transform: rotate(1deg);
+    /* Slight rotation */
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.1));
+    /* Soft shadow */
+    border: 3px solid white;
+    /* Photo border effect */
+    background: white;
+}
+
 /* Tape effect */
 .content-box::before {
     content: '';
